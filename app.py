@@ -157,9 +157,9 @@ def parse_date(options=[]):
         arg = re.search(r'\((.*?)\)', option).groups()[0]
         if opt == 'start_date':
             start_date = arg
-        if opt == 'end_date':
+        elif opt == 'end_date':
             end_date = arg
-        if opt == 'format':
+        elif opt == 'format':
             pattern = arg
     dte = fake.date_between(start_date=start_date, end_date=end_date)
     return dte.strftime(pattern)
@@ -173,7 +173,7 @@ def parse_time(options=[]):
         arg = re.search(r'\((.*?)\)', option).groups()[0]
         if opt == 'format':
             pattern = arg
-        if opt == 'floor':
+        elif opt == 'floor':
             pass
     return dte.strftime(pattern)
 
@@ -184,18 +184,23 @@ def parse_string(options=[]):
         opt = re.search(r'(\w+)(\s?\(.*?\))?', option).groups()[0]
         if opt == 'number':
             return parse_number()
-        if opt == 'name':
+        elif opt == 'name':
             rtn = fake.name()
-        if opt == 'first_name':
+        elif opt == 'first_name':
             rtn = fake.first_name()
-        if opt == 'last_name':
+        elif opt == 'last_name':
             rtn = fake.last_name()
-        if opt == 'uuid':
+        elif opt == 'uuid':
             rtn = fake.uuid4()
-        if opt == 'md5':
+        elif opt == 'md5':
             rtn = fake.md5()
-        if opt == 'words':
-            rtn = 'WORDS'
+        elif opt == 'paragraph':
+            rtn = fake.paragraph()
+        elif opt == 'sentence':
+            rtn = fake.sentence()
+        elif opt == 'word':
+            rtn = fake.word()
+
     return rtn
 
 
@@ -209,7 +214,7 @@ def parse_number(options=[]):
             if opt == 'digits':
                 r = fake.pyint(low, high)
                 rtn = fake.pystr_format(string_format=f'{"#"*r}')
-            if opt == 'range':
+            elif opt == 'range':
                 rtn = fake.pyint(min_value=low, max_value=high)
     return rtn
 
